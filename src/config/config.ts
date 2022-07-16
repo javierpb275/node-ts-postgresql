@@ -1,9 +1,11 @@
 export default {
   DB: {
     URI: "somedburl",
-    USER: "somedbuser",
-    PASSWORD: "somedbpassword",
-    NAME: "somedbname",
+    USER:  process.env.DB_USER || "somedbuser",
+    PASSWORD: process.env.DB_PASSWORD || "somedbpassword",
+    HOST: process.env.DB_HOST || "somedbhost",
+    NAME: process.env.DB_NAME || "somedbname",
+    PORT: Number(process.env.DB_PORT) || 5432
   },
   AUTH: {
     ACCESS_TOKEN_SECRET:

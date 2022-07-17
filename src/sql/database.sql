@@ -2,8 +2,8 @@ CREATE DATABASE task_app;
 
 CREATE TABLE users(
     user_id SERIAL PRIMARY KEY,
-    username VARCHAR(40) NOT NULL,
-    user_email TEXT NOT NULL,
+    username VARCHAR(40) UNIQUE NOT NULL,
+    user_email TEXT UNIQUE NOT NULL,
     user_password TEXT NOT NULL
 );
 

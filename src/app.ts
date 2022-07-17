@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import userRouter from "./routers/user.router";
 
 const app: Application = express();
 
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-app.use("/api/hello", (req, res) => res.send("Hello World!"));
+app.use("/api/users", userRouter);
 
 
 export default app;

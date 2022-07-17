@@ -29,7 +29,7 @@ export const auth = async (
       config.AUTH.ACCESS_TOKEN_SECRET
     ) as IPayload;
 
-    req.userId = payload.id;
+    req.user_email = payload.id;
 
     next();
   } catch (err) {

@@ -3,7 +3,7 @@ import config from "../config/config";
 import { Request, Response, NextFunction } from "express";
 
 export interface IPayload {
-  id: string;
+  id: any;
   iat: number;
   exp: number;
 }
@@ -29,10 +29,10 @@ export const auth = async (
       config.AUTH.ACCESS_TOKEN_SECRET
     ) as IPayload;
 
-    req.user_email = payload.id;
+    req.user_id = payload.id;
 
     next();
   } catch (err) {
-    res.status(401).send({ error: "Please authenticate" });
+    res.status(401).send({ error: true, data: "You are not authenticated" });
   }
 };

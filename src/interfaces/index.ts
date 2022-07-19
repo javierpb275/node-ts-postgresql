@@ -1,4 +1,4 @@
 interface returnData {
-    result: boolean,
+    error: boolean,
     data: any
 }

@@ -2,11 +2,11 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 export const generateToken = (
-  user_email: string,
+  user_id: any,
   secret: string,
   expiration: string
 ): string => {
-  const token: string = jwt.sign({ id: user_email }, secret, {
+  const token: string = jwt.sign({ id: user_id }, secret, {
     expiresIn: expiration,
   });
   return token;

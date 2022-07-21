@@ -225,6 +225,37 @@ export default class UserController {
     }
   }
 
+  public static async updateProfile(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    const { body, user_id } = req;
+    let response: QueryResult;
+    try {
+      if (body.user_password) {
+        const hash: string = await hashPassword(body.user_password);
+        body.user_password = hash;
+        response = await pool.query(
+          "UPDATE users SET username = $1, user_email = $2, user_password = $3 WHERE user_id = $4 RETURNING username, user_email",
+          [body.username, body.user_email, body.user_password, user_id]
+        );
+      } else {
+        response = await pool.query(
+          "UPDATE users SET username = $1, user_email = $2 WHERE user_id = $3 RETURNING username, user_email",
+          [body.username, body.user_email, user_id]
+        );
+      }
+      return res.status(200).send({
+        error: false,
+        data: {
+          user: response.rows[0],
+        },
+      });
+    } catch (err) {
+      return res.status(400).send({ error: true, data: err });
+    }
+  }
+
   public static async deleteProfile(
     req: Request,
     res: Response
